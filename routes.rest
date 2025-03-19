@@ -1,0 +1,29 @@
+### Get all Products
+GET http://localhost:4000/products
+
+### Get Product by ID
+GET http://localhost:4000/products/id
+
+### Create Product
+POST http://localhost:4000/products
+
+### Update Product
+PUT http://localhost:4000/products/id
+
+### Delete Product
+DELETE http://localhost:4000/products/id
+
+### Get all Countries
+GET http://localhost:4000/countries
+
+### Get Country by ID
+GET http://localhost:4000/countries/id
+
+### Create Country
+POST http://localhost:4000/countries
+
+### Update Country
+PUT http://localhost:4000/countries/id
+
+### Delete Country
+DELETE http://localhost:4000/countries/id
