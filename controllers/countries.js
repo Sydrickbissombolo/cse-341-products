@@ -1,5 +1,7 @@
+const router = require('express').Router();
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
+
 
 // GET all countries
 const getAllCountries = async (req, res) => {
@@ -101,10 +103,4 @@ const deleteCountry = async (req, res) => {
     }
 };
 
-module.exports = {
-    getAllCountries,
-    getSingleCountry,
-    createCountry,
-    updateCountry,
-    deleteCountry
-};
+module.exports = { getAllCountries, getSingleCountry, createCountry, updateCountry, deleteCountry };

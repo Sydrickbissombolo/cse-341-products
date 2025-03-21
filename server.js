@@ -19,12 +19,6 @@ app.use((req, res, next) => {
 });
 app.use('/', require('./routes'));
 
-// Error Handling Middleware
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).json({ message: 'Something went wrong!', error: err.message });
-});
-
 
 mongodb.initDb((err) => {
   if (err) {

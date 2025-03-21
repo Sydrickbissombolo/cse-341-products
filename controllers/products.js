@@ -1,3 +1,4 @@
+const router = require('express').Router();
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -7,7 +8,7 @@ const getAll = async (req, res) => {
     try {
         const result = await mongodb.getDatabase().db().collection('products').find().toArray();
         res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result); // Corrected: Using result instead of undefined 'products'
+        res.status(200).json(result);
     } catch (error) {
         res.status(500).json({ message: "Error retrieving products", error: error.message });
     }
@@ -35,13 +36,12 @@ const getSingle = async (req, res) => {
 const createProduct = async (req, res) => {
     //#swagger.tags=['Products']
     try {
-        const product = { // Corrected variable name
+        const product = {
             name: req.body.name,
             description: req.body.description,
             price: req.body.price,
             category: req.body.category,
             stock: req.body.stock,
-            createdAt: new Date() // Ensure createdAt is always a valid date
         };
 
         const response = await mongodb.getDatabase().db().collection('products').insertOne(product);
@@ -67,7 +67,6 @@ const updateProduct = async (req, res) => {
             price: req.body.price,
             category: req.body.category,
             stock: req.body.stock,
-            updatedAt: new Date() // Optional: Track when the product was updated
         };
 
         const response = await mongodb.getDatabase().db().collection('products').updateOne(
@@ -76,7 +75,7 @@ const updateProduct = async (req, res) => {
         );
 
         if (response.modifiedCount > 0) {
-            return res.status(200).json({ message: "Product updated successfully." }); // Fixed response format
+            return res.status(200).json({ message: "Product updated successfully." });
         } else {
             return res.status(404).json({ message: "No changes made or product not found." });
         }
@@ -94,7 +93,7 @@ const deleteProduct = async (req, res) => {
         const response = await mongodb.getDatabase().db().collection('products').deleteOne({ _id: productId });
 
         if (response.deletedCount > 0) {
-            return res.status(200).json({ message: "Product deleted successfully." }); // Fixed response format
+            return res.status(200).json({ message: "Product deleted successfully." });
         } else {
             return res.status(404).json({ message: "Product not found or already deleted." });
         }
@@ -103,10 +102,4 @@ const deleteProduct = async (req, res) => {
     }
 };
 
-module.exports = {
-    getAll,
-    getSingle,
-    createProduct,
-    updateProduct,
-    deleteProduct
-};
+module.exports = { getAll, getSingle, createProduct, updateProduct, deleteProduct };
