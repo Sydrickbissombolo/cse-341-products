@@ -1,10 +1,11 @@
 const passport = require('passport');
+const { isAuthenticated } = require('../middleware/authenticate');
 
 const router = require('express').Router();
 
 router.use('/', require('./swagger'));
-router.use('/products', require('./products'));
-router.use('/countries', require('./countries'));
+router.use('/products', isAuthenticated, require('./products'));
+router.use('/countries', isAuthenticated, require('./countries'));
 
 
 router.get('/', (req, res) => {
